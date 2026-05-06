@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Country Cove Balloons</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Floating Balloons Background -->
+    <div class="balloons-bg" id="balloonsBg"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>🎈 Country Cove Balloons</h1>
+            </div>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="cart.html">Cart <span id="cart-count">0</span></a>
+                <a href="login.html">Login</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="contact-page">
+        <div class="container">
+            <div class="page-header" style="text-align: center; margin-bottom: 3rem;">
+                <div class="hero-tag" style="display: inline-block; margin-bottom: 1rem;">📞 Get in Touch</div>
+                <h1 style="color: white; font-size: 2.5rem;">Contact Us</h1>
+                <p style="color: rgba(255,255,255,0.9);">We'd love to hear from you! Send us a message or visit our store</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2>Get in Touch</h2>
+                    <div class="contact-details">
+                        <div class="contact-item" style="background: var(--glass); backdrop-filter: blur(20px); border-radius: 20px; padding: 1.5rem; border: 1px solid rgba(255,255,255,0.3);">
+                            <h3>📍 Address</h3>
+                            <p>123 Party Street<br>Mumbai, India 400001</p>
+                        </div>
+                        <div class="contact-item" style="background: var(--glass); backdrop-filter: blur(20px); border-radius: 20px; padding: 1.5rem; border: 1px solid rgba(255,255,255,0.3);">
+                            <h3>📞 Phone</h3>
+                            <p>+91 9876543210</p>
+                        </div>
+                        <div class="contact-item" style="background: var(--glass); backdrop-filter: blur(20px); border-radius: 20px; padding: 1.5rem; border: 1px solid rgba(255,255,255,0.3);">
+                            <h3>📧 Email</h3>
+                            <p>info@countrycoveballoons.com</p>
+                        </div>
+                        <div class="contact-item" style="background: var(--glass); backdrop-filter: blur(20px); border-radius: 20px; padding: 1.5rem; border: 1px solid rgba(255,255,255,0.3);">
+                            <h3>🕒 Hours</h3>
+                            <p>Mon-Sat: 9AM-8PM<br>Sunday: 10AM-6PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h2>Send us a Message</h2>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="contact-name">Name</label>
+                            <input type="text" id="contact-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Email</label>
+                            <input type="email" id="contact-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject">Subject</label>
+                            <input type="text" id="contact-subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Message</label>
+                            <textarea id="contact-message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">🚀 Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🎈 Country Cove Balloons</h3>
+                    <p>Your one-stop shop for premium party balloons and decorations. Making celebrations magical since 2020!</p>
+                    <div style="margin-top: 1rem;">
+                        <span style="font-size: 1.5rem; margin-right: 0.5rem;">🎉</span>
+                        <span style="font-size: 1.5rem; margin-right: 0.5rem;">🎂</span>
+                        <span style="font-size: 1.5rem; margin-right: 0.5rem;">🎈</span>
+                        <span style="font-size: 1.5rem;">✨</span>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">🏠 Home</a>
+                    <a href="products.html">🛍️ Products</a>
+                    <a href="cart.html">🛒 Cart</a>
+                    <a href="login.html">👤 Login</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>📞 +91 9876543210</p>
+                    <p>📧 info@countrycoveballoons.com</p>
+                    <p>📍 123 Party Lane, Mumbai</p>
+                    <p>🕐 Mon-Sat: 9AM - 8PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Country Cove Balloons. All rights reserved. Made with 🎈 in India</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Create floating balloons
+        function createBalloons() {
+            const bg = document.getElementById('balloonsBg');
+            const colors = ['#FF4D8D', '#FFD93D', '#9B5FE0', '#00C9A7', '#FF8C42'];
+            
+            for (let i = 0; i < 12; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'bg-balloon';
+                const size = 40 + Math.random() * 80;
+                balloon.style.cssText = `
+                    width: ${size}px;
+                    height: ${size * 1.2}px;
+                    left: ${Math.random() * 100}%;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    animation-duration: ${15 + Math.random() * 20}s;
+                    animation-delay: ${Math.random() * 10}s;
+                `;
+                bg.appendChild(balloon);
+            }
+        }
+        
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createBalloons();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1223 @@
+/* ========================================
+   🎈 COUNTRY COVE BALLOONS - MODERN ANIMATED CSS
+   ======================================== */
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #FF4D8D;
+    --primary-light: #FF85B3;
+    --secondary: #9B5FE0;
+    --accent: #FFD93D;
+    --dark: #1a1a2e;
+    --light: #fff5f8;
+    --white: #ffffff;
+    --gradient-1: linear-gradient(135deg, #FF4D8D 0%, #9B5FE0 50%, #FFD93D 100%);
+    --gradient-2: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-3: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --glass: rgba(255, 255, 255, 0.15);
+    --shadow-soft: 0 10px 40px rgba(255, 77, 141, 0.15);
+    --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--dark);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Floating Balloons Background Animation */
+.balloons-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.bg-balloon {
+    position: absolute;
+    bottom: -100px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    opacity: 0.08;
+    animation: float-up linear infinite;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.08;
+    }
+    50% {
+        opacity: 0.12;
+    }
+    100% {
+        transform: translateY(-120vh) rotate(360deg) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* Confetti Animation */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    animation: confetti-fall linear infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* ========================================
+   HEADER - Glassmorphism Effect
+   ======================================== */
+.header {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: logo-pulse 2s ease-in-out infinite;
+}
+
+@keyframes logo-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-1);
+    transition: left 0.3s ease;
+    z-index: -1;
+    border-radius: 25px;
+}
+
+.nav a:hover::before {
+    left: 0;
+}
+
+.nav a:hover {
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Cart Badge Animation */
+#cart-count {
+    background: var(--primary);
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    margin-left: 0.3rem;
+    animation: badge-bounce 0.5s ease;
+}
+
+@keyframes badge-bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+}
+
+/* ========================================
+   BUTTONS - Modern Animated
+   ======================================== */
+.btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: -1;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary {
+    background: var(--gradient-1);
+    color: white;
+    box-shadow: 0 10px 30px rgba(255, 77, 141, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(255, 77, 141, 0.6);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: white;
+    transform: translateY(-3px);
+}
+
+/* ========================================
+   HERO SECTION - Animated
+   ======================================== */
+.hero {
+    padding: 140px 0 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 77, 141, 0.1) 0%, transparent 70%);
+    animation: pulse-bg 8s ease-in-out infinite;
+}
+
+@keyframes pulse-bg {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.hero .container {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+}
+
+.hero-content {
+    flex: 1;
+    text-align: left;
+    animation: slide-in-left 1s ease-out;
+}
+
+@keyframes slide-in-left {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.hero-content h2 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: text-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes text-glow {
+    from { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 77, 141, 0.5); }
+    to { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 0 0 40px rgba(255, 77, 141, 0.8); }
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
+    color: white;
+    animation: fade-in-up 1s ease-out 0.3s both;
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fade-in-up 1s ease-out 0.6s both;
+}
+
+.hero-image {
+    flex: 1;
+    text-align: center;
+    animation: slide-in-right 1s ease-out, float 3s ease-in-out infinite;
+}
+
+@keyframes slide-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(2deg); }
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 30px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.5s ease;
+}
+
+.hero-image img:hover {
+    transform: scale(1.05) rotate(-3deg);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+}
+
+/* ========================================
+   CATEGORIES - 3D Cards
+   ======================================== */
+.categories {
+    padding: 100px 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    position: relative;
+}
+
+.categories h2 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 4rem;
+    color: white;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: fade-in-up 0.8s ease-out;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2.5rem;
+    perspective: 1000px;
+}
+
+.category-card {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-decoration: none;
+    color: white;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.category-card::before {
+    content: '🎈';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 3rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+    animation: none;
+}
+
+.category-card:hover::before {
+    opacity: 1;
+    animation: balloon-float 1s ease-in-out infinite;
+}
+
+@keyframes balloon-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.category-card:hover {
+    transform: translateY(-15px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.category-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.category-card:hover img {
+    transform: scale(1.1);
+}
+
+.category-card h3 {
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================
+   FEATURED PRODUCTS - Animated Cards
+   ======================================== */
+.featured {
+    padding: 100px 0;
+    background: rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+.featured h2 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 4rem;
+    color: white;
+    font-weight: 700;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+}
+
+.product-card {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: fade-in-up 0.6s ease-out;
+}
+
+.product-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(255, 77, 141, 0.3);
+    border-color: rgba(255, 77, 141, 0.5);
+}
+
+.product-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.1);
+}
+
+.product-info {
+    padding: 1.5rem;
+    color: white;
+}
+
+.product-info h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.product-info .price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.product-info .rating {
+    color: var(--accent);
+    font-size: 1.2rem;
+    animation: star-twinkle 1.5s ease-in-out infinite;
+}
+
+@keyframes star-twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Add to Cart Button */
+.add-to-cart {
+    width: 100%;
+    padding: 12px;
+    margin-top: 1rem;
+    background: var(--gradient-1);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.add-to-cart:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 77, 141, 0.5);
+}
+
+.add-to-cart:active {
+    transform: scale(0.95);
+}
+
+/* ========================================
+   REVIEWS - Glass Cards
+   ======================================== */
+.reviews {
+    padding: 100px 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.1) 100%);
+}
+
+.reviews h2 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 4rem;
+    color: white;
+    font-weight: 700;
+}
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+}
+
+.review-card {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    padding: 2.5rem;
+    border-radius: 25px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.review-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.review-card:hover::before {
+    left: 100%;
+}
+
+.review-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.review-card .stars {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.review-card p {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.reviewer {
+    font-weight: 700;
+    color: white;
+    font-size: 1.1rem;
+}
+
+/* ========================================
+   FOOTER - Modern
+   ======================================== */
+.footer {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    color: white;
+    padding: 4rem 0 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-section h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.footer-section p,
+.footer-section a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    margin-bottom: 0.8rem;
+    display: block;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 0;
+}
+
+.footer-section a::before {
+    content: '🎈';
+    position: absolute;
+    left: -25px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: var(--primary);
+    padding-left: 25px;
+}
+
+.footer-section a:hover::before {
+    opacity: 1;
+    left: 0;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 2rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ========================================
+   PRODUCTS PAGE
+   ======================================== */
+.products-page {
+    padding: 140px 0 80px;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.filters {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-bottom: 3rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-group label {
+    color: white;
+    font-weight: 600;
+}
+
+.filter-group select {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 0.75rem;
+    border-radius: 10px;
+}
+
+/* ========================================
+   CART PAGE
+   ======================================== */
+.cart-page {
+    padding: 140px 0 80px;
+}
+
+.cart-item {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.cart-item:hover {
+    transform: translateX(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.cart-summary {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+}
+
+/* ========================================
+   LOGIN PAGE
+   ======================================== */
+.login-page {
+    padding: 140px 0 80px;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+}
+
+.login-form {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    padding: 3rem;
+    max-width: 450px;
+    margin: 0 auto;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slide-in-up 0.8s ease-out;
+}
+
+@keyframes slide-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-form h1 {
+    color: white;
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+}
+
+.form-group input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 1rem;
+    border-radius: 15px;
+    width: 100%;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 20px rgba(255, 77, 141, 0.3);
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ========================================
+   CONTACT PAGE
+   ======================================== */
+.contact-page {
+    padding: 140px 0 80px;
+}
+
+.contact-form {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    padding: 3rem;
+}
+
+.contact-info h2,
+.contact-form h2 {
+    color: white;
+    font-size: 2.5rem;
+}
+
+.contact-item h3 {
+    color: var(--primary);
+    font-size: 1.3rem;
+}
+
+/* ========================================
+   ANIMATIONS ON SCROLL
+   ======================================== */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) {
+    .hero .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content h2 {
+        font-size: 2.5rem;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .category-grid,
+    .product-grid,
+    .review-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-image img {
+        max-width: 80%;
+    }
+}
+
+/* Loading Animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Sparkle Effect */
+.sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    animation: sparkle 1.5s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+}
+
+/* Heart Animation for Wishlist */
+.heart-animation {
+    animation: heart-beat 0.5s ease-in-out;
+}
+
+@keyframes heart-beat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.3); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+/* Notification Toast */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--gradient-1);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 9999;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Discount Badge */
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--gradient-3);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    animation: pulse-badge 2s ease-in-out infinite;
+    z-index: 10;
+}
+
+@keyframes pulse-badge {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Ribbon Animation */
+.ribbon {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+
+.ribbon span {
+    position: absolute;
+    top: 20px;
+    right: -25px;
+    width: 120px;
+    transform: rotate(45deg);
+    background: var(--gradient-1);
+    color: white;
+    text-align: center;
+    padding: 5px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Particle Effect */
+.particle {
+    position: fixed;
+    pointer-events: none;
+    opacity: 0;
+    animation: particle-float 3s ease-out forwards;
+}
+
+@keyframes particle-float {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(0.5);
+    }
+}
+
+/* Progress Bar Animation */
+.progress-bar {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--gradient-1);
+    border-radius: 2px;
+    animation: progress-fill 2s ease-out;
+}
+
+@keyframes progress-fill {
+    from { width: 0; }
+}
+
+/* Shimmer Effect */
+.shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Shake Animation for Error */
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* Flip Card Effect */
+.flip-card {
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 25px;
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+    background: var(--gradient-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Neon Glow Effect */
+.neon-glow {
+    box-shadow: 0 0 10px rgba(255, 77, 141, 0.5),
+                0 0 20px rgba(255, 77, 141, 0.3),
+                0 0 30px rgba(255, 77, 141, 0.2);
+    animation: neon-pulse 2s ease-in-out infinite;
+}
+
+@keyframes neon-pulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(255, 77, 141, 0.5),
+                    0 0 20px rgba(255, 77, 141, 0.3),
+                    0 0 30px rgba(255, 77, 141, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 77, 141, 0.8),
+                    0 0 40px rgba(255, 77, 141, 0.5),
+                    0 0 60px rgba(255, 77, 141, 0.3);
+    }
+}
+
+/* Wave Animation */
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+    background-size: cover;
+    animation: wave-move 10s ease-in-out infinite;
+}
+
+@keyframes wave-move {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Morphing Blob */
+.blob {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: var(--gradient-1);
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    animation: morph 8s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes morph {
+    0%, 100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        transform: rotate(0deg);
+    }
+    50% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+        transform: rotate(180deg);
+    }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gradient-1);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* Selection Color */
+::selection {
+    background: var(--primary);
+    color: white;
+}
+
+/* Focus Styles */
+*:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Country Cove Balloons</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Floating Balloons Background -->
+    <div class="balloons-bg" id="balloonsBg"></div>
+    
+    <!-- Morphing Blob Background -->
+    <div class="blob" style="top: 5%; right: 10%;"></div>
+    <div class="blob" style="bottom: 10%; left: 5%; animation-delay: -4s;"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>🎈 Country Cove Balloons</h1>
+            </div>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="cart.html">Cart <span id="cart-count">0</span></a>
+                <a href="login.html">Login</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Products Section -->
+    <section class="products-page">
+        <div class="container">
+            <div class="page-header">
+                <div class="hero-tag" style="display: inline-block; margin-bottom: 1rem;">🛍️ Shop Collection</div>
+                <h1>Our Products</h1>
+                <p>Discover our amazing collection of balloons and party decorations for every celebration</p>
+            </div>
+            <div class="hero-image" style="margin: 3rem auto 0; max-width: 800px;">
+                <img src="images/mothers-day/Black-and-Gold-50th-Birthday-Hot-Air-Balloon-Gifts-Large_1600x.webp" alt="Balloon shop banner">
+            </div>
+
+            <!-- Filters -->
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="category-filter">Category:</label>
+                    <select id="category-filter">
+                        <option value="all">All Categories</option>
+                        <option value="occasion">Occasion Based</option>
+                        <option value="shape">Shape / Design Based</option>
+                        <option value="color">Color Based</option>
+                        <option value="type">Type Based</option>
+                        <option value="premium">Special / Premium</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="price-filter">Price Range:</label>
+                    <select id="price-filter">
+                        <option value="all">All Prices</option>
+                        <option value="0-500">₹0 - ₹500</option>
+                        <option value="500-1000">₹500 - ₹1000</option>
+                        <option value="1000+">₹1000+</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="color-filter">Color:</label>
+                    <select id="color-filter">
+                        <option value="all">All Colors</option>
+                        <option value="red">Red</option>
+                        <option value="blue">Blue</option>
+                        <option value="pink">Pink</option>
+                        <option value="gold">Gold</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="product-grid" id="products-grid">
+                <!-- Products will be loaded here -->
+            </div>
+            
+            <!-- Loading Animation -->
+            <div id="loading" style="text-align: center; padding: 3rem; display: none;">
+                <div class="loading" style="width: 50px; height: 50px; border-width: 5px;"></div>
+                <p style="color: white; margin-top: 1rem;">Loading amazing products...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🎈 Country Cove Balloons</h3>
+                    <p>Your one-stop shop for premium party balloons and decorations. Making celebrations magical since 2020!</p>
+                    <div style="margin-top: 1rem;">
+                        <span style="font-size: 1.5rem; margin-right: 0.5rem;">🎉</span>
+                        <span style="font-size: 1.5rem; margin-right: 0.5rem;">🎂</span>
+                        <span style="font-size: 1.5rem; margin-right: 0.5rem;">🎈</span>
+                        <span style="font-size: 1.5rem;">✨</span>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">🏠 Home</a>
+                    <a href="products.html">🛍️ Products</a>
+                    <a href="cart.html">🛒 Cart</a>
+                    <a href="contact.html">📞 Contact</a>
+                    <a href="login.html">👤 Login</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>📞 +91 9876543210</p>
+                    <p>📧 info@countrycoveballoons.com</p>
+                    <p>📍 123 Party Lane, Mumbai</p>
+                    <p>🕐 Mon-Sat: 9AM - 8PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Country Cove Balloons. All rights reserved. Made with 🎈 in India</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Create floating balloons
+        function createBalloons() {
+            const bg = document.getElementById('balloonsBg');
+            const colors = ['#FF4D8D', '#FFD93D', '#9B5FE0', '#00C9A7', '#FF8C42'];
+            
+            for (let i = 0; i < 12; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'bg-balloon';
+                const size = 40 + Math.random() * 80;
+                balloon.style.cssText = `
+                    width: ${size}px;
+                    height: ${size * 1.2}px;
+                    left: ${Math.random() * 100}%;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    animation-duration: ${15 + Math.random() * 20}s;
+                    animation-delay: ${Math.random() * 10}s;
+                `;
+                bg.appendChild(balloon);
+            }
+        }
+        
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createBalloons();
+        });
+    </script>
+</body>
+</html>

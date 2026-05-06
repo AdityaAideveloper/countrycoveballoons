@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Country Cove Balloons</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Floating Balloons Background -->
+    <div class="balloons-bg" id="balloonsBg"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>🎈 Country Cove Balloons</h1>
+            </div>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="cart.html">Cart <span id="cart-count">0</span></a>
+                <a href="login.html">Login</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cart Section -->
+    <section class="cart-page">
+        <div class="container">
+            <div class="page-header" style="text-align: center; margin-bottom: 3rem;">
+                <div class="hero-tag" style="display: inline-block; margin-bottom: 1rem;">🛒 Shopping Cart</div>
+                <h1 style="color: white; font-size: 2.5rem;">Your Shopping Cart</h1>
+                <p style="color: rgba(255,255,255,0.9);">Review your items and proceed to checkout</p>
+            </div>
+            
+            <!-- Free Shipping Progress -->
+            <div class="free-shipping-progress" style="background: var(--glass); backdrop-filter: blur(20px); border-radius: 20px; padding: 1.5rem; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.3);">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                    <span style="color: white; font-weight: 600;">🚚 Free Shipping Progress</span>
+                    <span id="shipping-text" style="color: var(--accent); font-weight: 700;">Add ₹<span id="remaining-amount">1000</span> more for free shipping!</span>
+                </div>
+                <div class="progress-bar" style="height: 12px; background: rgba(255,255,255,0.2); border-radius: 10px; overflow: hidden;">
+                    <div id="progress-fill" class="progress-bar-fill" style="width: 0%; transition: width 0.5s ease;"></div>
+                </div>
+            </div>
+            
+            <div class="cart-content" style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+                <div class="cart-items-container">
+                    <div id="cart-items">
+                        <!-- Cart items will be loaded here -->
+                    </div>
+                    
+                    <!-- Empty Cart State -->
+                    <div id="empty-cart" style="display: none; text-align: center; padding: 4rem 2rem; background: var(--glass); backdrop-filter: blur(20px); border-radius: 30px; border: 1px solid rgba(255,255,255,0.3);">
+                        <div style="font-size: 6rem; animation: float 3s ease-in-out infinite;">🎈</div>
+                        <h2 style="color: white; font-size: 2rem; margin: 1rem 0;">Your cart is empty!</h2>
+                        <p style="color: rgba(255,255,255,0.8); margin-bottom: 2rem;">Looks like you haven't added any balloons yet. Let's fix that!</p>
+                        <a href="products.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 14px 32px;">🛍️ Start Shopping</a>
+                    </div>
+                </div>
+                
+                <div class="cart-summary-container">
+                    <div class="cart-summary" id="cart-summary" style="position: sticky; top: 100px;">
+                        <!-- Cart summary will be loaded here -->
+                    </div>
+                    
+                    <!-- Coupon Section -->
+                    <div class="coupon-section" style="background: var(--glass); backdrop-filter: blur(20px); border-radius: 20px; padding: 1.5rem; margin-top: 1.5rem; border: 1px solid rgba(255,255,255,0.3);">
+                        <h3 style="color: white; margin-bottom: 1rem;">🎟️ Have a coupon?</h3>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="text" id="coupon-input" placeholder="Enter coupon code" style="flex: 1; padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white;">
+                            <button onclick="applyCoupon()" class="btn btn-secondary" style="padding: 12px 20px;">Apply</button>
+                        </div>
+                        <p id="coupon-message" style="color: var(--accent); margin-top: 0.5rem; font-size: 0.9rem;"></p>
+                    </div>
+                    
+                    <!-- Trust Badges -->
+                    <div class="trust-badges" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem;">
+                        <div style="text-align: center; color: rgba(255,255,255,0.8);">
+                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🔒</div>
+                            <small>Secure</small>
+                        </div>
+                        <div style="text-align: center; color: rgba(255,255,255,0.8);">
+                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🚚</div>
+                            <small>Fast</small>
+                        </div>
+                        <div style="text-align: center; color: rgba(255,255,255,0.8);">
+                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">✅</div>
+                            <small>Quality</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Continue Shopping -->
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="products.html" class="btn btn-secondary">← Continue Shopping</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🎈 Country Cove Balloons</h3>
+                    <p>Your one-stop shop for premium party balloons and decorations. Making celebrations magical since 2020!</p>
+                    <div style="margin-top: 1rem;">
+                        <span style="font-size: 1.5rem; margin-right: 0.5rem;">🎉</span>
+                        <span style="font-size: 1.5rem; margin-right: 0.5rem;">🎂</span>
+                        <span style="font-size: 1.5rem; margin-right: 0.5rem;">🎈</span>
+                        <span style="font-size: 1.5rem;">✨</span>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">🏠 Home</a>
+                    <a href="products.html">🛍️ Products</a>
+                    <a href="cart.html">🛒 Cart</a>
+                    <a href="contact.html">📞 Contact</a>
+                    <a href="login.html">👤 Login</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>📞 +91 9876543210</p>
+                    <p>📧 info@countrycoveballoons.com</p>
+                    <p>📍 123 Party Lane, Mumbai</p>
+                    <p>🕐 Mon-Sat: 9AM - 8PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Country Cove Balloons. All rights reserved. Made with 🎈 in India</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Create floating balloons
+        function createBalloons() {
+            const bg = document.getElementById('balloonsBg');
+            const colors = ['#FF4D8D', '#FFD93D', '#9B5FE0', '#00C9A7', '#FF8C42'];
+            
+            for (let i = 0; i < 12; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'bg-balloon';
+                const size = 40 + Math.random() * 80;
+                balloon.style.cssText = `
+                    width: ${size}px;
+                    height: ${size * 1.2}px;
+                    left: ${Math.random() * 100}%;  
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    animation-duration: ${15 + Math.random() * 20}s;
+                    animation-delay: ${Math.random() * 10}s;
+                `;
+                bg.appendChild(balloon);
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createBalloons();
+        });
+    </script>
+</body>
+</html>
