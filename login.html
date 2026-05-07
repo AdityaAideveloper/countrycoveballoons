@@ -791,7 +791,7 @@
             formData.append('password', document.getElementById('loginPassword').value);
             
             try {
-                const response = await fetch('backend/auth.php', {
+                const response = await fetch('api/auth/login/', {
                     method: 'POST',
                     body: formData
                 });
@@ -846,7 +846,7 @@
             formData.append('address', document.getElementById('userAddress').value);
             
             try {
-                const response = await fetch('backend/auth.php', {
+                const response = await fetch('api/auth/register/user/', {
                     method: 'POST',
                     body: formData
                 });
@@ -904,7 +904,7 @@
             formData.append('gst_number', document.getElementById('storeGst').value);
             
             try {
-                const response = await fetch('backend/auth.php', {
+                const response = await fetch('api/auth/register/store/', {
                     method: 'POST',
                     body: formData
                 });
@@ -947,7 +947,7 @@
         // Test database connection
         async function testDatabase() {
             try {
-                const response = await fetch('backend/test.php');
+                const response = await fetch('api/test/');
                 const data = await response.json();
                 
                 if(!data.success) {
@@ -957,7 +957,7 @@
                     console.log('Database OK:', data);
                     if(!data.ready) {
                         // Initialize tables by calling auth.php
-                        await fetch('backend/auth.php?action=check_session');
+                        await fetch('api/auth/session/');
                     }
                 }
             } catch(e) {

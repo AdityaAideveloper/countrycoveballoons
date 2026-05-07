@@ -222,7 +222,7 @@
         // Load products
         async function loadProducts() {
             try {
-                const response = await fetch('backend/api.php/products');
+                const response = await fetch('api/products');
                 const products = await response.json();
 
                 const tbody = document.getElementById('products-table-body');
@@ -247,7 +247,7 @@
         // Load orders
         async function loadOrders() {
             try {
-                const response = await fetch('backend/api.php/orders');
+                const response = await fetch('api/orders');
                 const orders = await response.json();
 
                 const tbody = document.getElementById('orders-table-body');
@@ -284,7 +284,7 @@
             };
 
             try {
-                const response = await fetch('backend/api.php/products', {
+                const response = await fetch('api/products', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

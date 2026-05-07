@@ -1,6 +1,6 @@
 # Country Cove Balloons - E-commerce Website
 
-A complete e-commerce website for selling balloons and party decorations built with HTML, CSS, JavaScript, PHP, and MySQL.
+A complete e-commerce website for selling balloons and party decorations built with HTML, CSS, JavaScript, and Django.
 
 ## Features
 
@@ -17,8 +17,8 @@ A complete e-commerce website for selling balloons and party decorations built w
 ## Technologies Used
 
 - **Frontend:** HTML5, CSS3, JavaScript (ES6+)
-- **Backend:** PHP 7+
-- **Database:** MySQL
+- **Backend:** Django 6.0+
+- **Database:** SQLite (default), easily configurable for MySQL/PostgreSQL
 - **Styling:** Custom CSS with modern design
 - **Icons:** Font Awesome (via CDN)
 - **Fonts:** Google Fonts (Poppins)
@@ -27,6 +27,15 @@ A complete e-commerce website for selling balloons and party decorations built w
 
 ```
 balloon-planet/
+├── manage.py               # Django management script
+├── balloon_planet/         # Django project config
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── api/                    # Django app (models, views, URLs)
+│   ├── models.py
+│   ├── views.py
+│   └── urls.py
 ├── index.html              # Homepage
 ├── products.html           # Product listing page
 ├── product.html            # Product detail page
@@ -38,9 +47,6 @@ balloon-planet/
 │   └── style.css          # Main stylesheet
 ├── js/
 │   └── script.js          # Frontend JavaScript
-├── backend/
-│   ├── config.php         # Database configuration
-│   └── api.php            # API endpoints
 ├── images/                # Product images
 └── README.md              # This file
 ```
@@ -49,10 +55,9 @@ balloon-planet/
 
 ### Prerequisites
 
-1. **Web Server:** Apache/Nginx with PHP support
-2. **PHP:** Version 7.0 or higher
-3. **MySQL:** Version 5.6 or higher
-4. **Web Browser:** Modern browser with JavaScript enabled
+1. **Python:** Version 3.10 or higher
+2. **Django:** Version 6.0 or higher
+3. **Web Browser:** Modern browser with JavaScript enabled
 
 ### Installation Steps
 
@@ -63,27 +68,32 @@ balloon-planet/
    cd balloon-planet
    ```
 
-2. **Database Setup:**
-   - Create a new MySQL database named `balloon_planet`
-   - The database tables will be automatically created when you first run the application
+2. **Install dependencies:**
 
-3. **Configure Database Connection:**
-   - Open `backend/config.php`
-   - Update the database credentials if needed:
-     ```php
-     define('DB_HOST', 'localhost');
-     define('DB_USER', 'your_username');
-     define('DB_PASS', 'your_password');
-     define('DB_NAME', 'balloon_planet');
-     ```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-4. **Web Server Setup:**
-   - Place the project folder in your web server's document root
-   - For XAMPP: Place in `htdocs/balloon-planet/`
-   - For WAMP: Place in `www/balloon-planet/`
+3. **Database Setup:**
 
-5. **Access the Website:**
-   - Open your browser and navigate to: `http://localhost/balloon-planet/`
+   ```bash
+   python manage.py migrate
+   ```
+
+4. **Initialize sample data and admin:**
+
+   ```bash
+   python -c "import os; os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'balloon_planet.settings'); import django; django.setup(); from api.models import CustomUser, Product; CustomUser.objects.create_superuser('Admin', 'admin@countrycoveballoons.com', 'admin123', role='admin', phone='9876543210', status='active') if not CustomUser.objects.filter(role='admin').exists() else None; [Product.objects.create(**d) for d in [{'name':'Rainbow Birthday Balloon Set','description':'Beautiful rainbow colored balloons perfect for birthday celebrations.','price':599,'stock':100,'category':'birthday','color':'multi','image':'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&q=80','rating':4.5},{'name':'Golden Wedding Balloons','description':'Elegant gold balloons for wedding decorations.','price':899,'stock':100,'category':'wedding','color':'gold','image':'https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?w=400&q=80','rating':4.8},{'name':'Pink Anniversary Package','description':'Romantic pink balloon arrangement perfect for anniversary celebrations.','price':749,'stock':100,'category':'anniversary','color':'pink','image':'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&q=80','rating':4.7},{'name':'Blue Party Balloon Kit','description':'Complete blue balloon kit for birthday parties.','price':449,'stock':100,'category':'birthday','color':'blue','image':'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&q=80','rating':4.3},{'name':'Red Heart Balloons','description':'Red heart-shaped balloons for romantic occasions.','price':399,'stock':100,'category':'anniversary','color':'red','image':'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&q=80','rating':4.6},{'name':'Silver Celebration Set','description':'Silver metallic balloons for elegant celebrations.','price':699,'stock':100,'category':'wedding','color':'silver','image':'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&q=80','rating':4.4}] if not Product.objects.exists() else None"
+   ```
+
+5. **Run the development server:**
+
+   ```bash
+   python manage.py runserver
+   ```
+
+6. **Access the Website:**
+   - Open your browser and navigate to: `http://127.0.0.1:8000/`
    - The homepage should load with sample products
 
 ## Features Overview
@@ -101,29 +111,40 @@ balloon-planet/
 ### Backend Features
 
 - **RESTful API:** Clean API endpoints for products, orders, and users
-- **Database Integration:** MySQL database with proper relationships
-- **User Authentication:** Login/register system with password hashing
+- **Database Integration:** SQLite with Django ORM (MySQL/PostgreSQL configurable)
+- **User Authentication:** Login/register system with Django's password hashing
 - **Order Management:** Complete order processing and storage
 - **Product Management:** CRUD operations for products
-- **Security:** Prepared statements to prevent SQL injection
+- **Security:** Django's built-in CSRF protection and SQL injection prevention
 
 ## API Endpoints
 
 ### Products
 
-- `GET /api/products` - Get all products (with optional filters)
-- `GET /api/products/{id}` - Get single product
-- `POST /api/products` - Create new product
+- `GET /api/products/` - Get all products (with optional filters)
+- `GET /api/products/<id>/` - Get single product
+- `POST /api/products/` - Create new product
 
 ### Orders
 
-- `GET /api/orders` - Get all orders
-- `GET /api/orders/{id}` - Get single order
-- `POST /api/orders` - Create new order
+- `GET /api/orders/` - Get all orders
+- `GET /api/orders/<id>/` - Get single order
+- `POST /api/orders/` - Create new order
 
-### Users
+### Auth
 
-- `POST /api/users` - User registration/login
+- `POST /api/auth/login/` - Login
+- `POST /api/auth/register/user/` - Register user
+- `POST /api/auth/register/store/` - Register store
+- `POST /api/auth/logout/` - Logout
+- `GET /api/auth/session/` - Check session
+
+### Dashboards
+
+- `POST /api/dashboard/user/` - User dashboard data
+- `POST /api/dashboard/store/` - Store dashboard data
+- `POST /api/dashboard/admin/` - Admin dashboard data
+- `POST /api/store/update-status/` - Approve/reject store
 
 ## Sample Data
 

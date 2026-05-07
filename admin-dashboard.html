@@ -479,7 +479,7 @@
         
         async function checkAuth() {
             try {
-                const response = await fetch('backend/auth.php?action=check_session');
+                const response = await fetch('api/auth/session/');
                 const data = await response.json();
                 
                 if(!data.logged_in) {
@@ -503,7 +503,7 @@
                 const formData = new FormData();
                 formData.append('action', 'get_admin_dashboard');
                 
-                const response = await fetch('backend/auth.php', {
+                const response = await fetch('api/dashboard/admin/', {
                     method: 'POST',
                     body: formData
                 });
@@ -621,7 +621,7 @@
                 formData.append('store_id', storeId);
                 formData.append('status', status);
                 
-                const response = await fetch('backend/auth.php', {
+                const response = await fetch('api/store/update-status/', {
                     method: 'POST',
                     body: formData
                 });
@@ -659,7 +659,7 @@
         async function logout() {
             const formData = new FormData();
             formData.append('action', 'logout');
-            await fetch('backend/auth.php', { method: 'POST', body: formData });
+            await fetch('api/auth/logout/', { method: 'POST', body: formData });
             window.location.href = 'index.html';
         }
         

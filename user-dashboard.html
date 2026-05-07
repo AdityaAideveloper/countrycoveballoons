@@ -379,7 +379,7 @@
         
         async function checkAuth() {
             try {
-                const response = await fetch('backend/auth.php?action=check_session');
+                const response = await fetch('api/auth/session/');
                 const data = await response.json();
                 
                 if(!data.logged_in) {
@@ -410,7 +410,7 @@
                 const formData = new FormData();
                 formData.append('action', 'get_user_dashboard');
                 
-                const response = await fetch('backend/auth.php', {
+                const response = await fetch('api/dashboard/user/', {
                     method: 'POST',
                     body: formData
                 });
@@ -476,7 +476,7 @@
                 const formData = new FormData();
                 formData.append('action', 'logout');
                 
-                await fetch('backend/auth.php', {
+                await fetch('api/auth/logout/', {
                     method: 'POST',
                     body: formData
                 });
